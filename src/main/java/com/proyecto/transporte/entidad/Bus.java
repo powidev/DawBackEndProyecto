@@ -19,7 +19,7 @@ public class Bus {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_bus")
-    private Long idBus;
+    private Integer idBus;
 
     @Column(name = "modelo", nullable = false, length = 50)
     private String modelo;
@@ -28,15 +28,15 @@ public class Bus {
     private String marca;
 
     @Column(name = "anio", nullable = false)
-    private int anio;
+    private Integer anio;
 
     @Column(name = "capacidad", nullable = false)
-    private int capacidad;
+    private Integer capacidad;
 
     @Column(name = "placa", nullable = false, length = 20)
     private String placa;
 
-    @OneToMany(mappedBy = "idBus", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("idBus")
+    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("bus")
     private List<Viaje> viajes;
 }

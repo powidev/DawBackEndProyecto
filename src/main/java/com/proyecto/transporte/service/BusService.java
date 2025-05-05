@@ -17,26 +17,25 @@ public class BusService {
         return repo.findAll();
     }
 
-    public Bus registrar(Bus bus) {
-        return repo.save(bus);
+    public Bus registrar(Bus b) {
+        return repo.save(b);
     }
 
-    public Bus findById(Long id) {
+    public Bus findById(Integer id) {
         return repo.findById(id).orElseThrow(() -> new RuntimeException("Bus no encontrado"));
     }
 
-    public Bus actualizar(Long id, Bus busActualizado) {
+    public Bus actualizar(Integer id, Bus busActualizado) {
         Bus bus = repo.findById(id).orElseThrow(() -> new RuntimeException("Bus no encontrado"));
         bus.setModelo(busActualizado.getModelo());
         bus.setMarca(busActualizado.getMarca());
         bus.setAnio(busActualizado.getAnio());
         bus.setCapacidad(busActualizado.getCapacidad());
         bus.setPlaca(busActualizado.getPlaca());
-        bus.setViajes(busActualizado.getViajes());
         return repo.save(bus);
     }
 
-    public void eliminar(Long id) {
+    public void eliminar(Integer id) {
         if (repo.existsById(id)) {
             repo.deleteById(id);
         } else {

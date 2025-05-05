@@ -1,0 +1,17 @@
+<!-- admin.html --> 
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <title>Panel de Administración</title> 
+</head> 
+<body> 
+    <h1>Bienvenido al Panel de Administración</h1> 
+	<p>Solo los usuarios con el rol <strong>ADMIN</strong> pueden ver esta página.</p>
+	
+	<a th:href="@{/}">Volver al inicio</a> 
+	<form th:action="@{/logout}" method="post"> 
+		<button type="submit">Cerrar sesión</button> 
+	</form> 
+</body> 
+</html>

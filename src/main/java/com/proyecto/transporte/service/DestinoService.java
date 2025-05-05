@@ -30,7 +30,7 @@ public class DestinoService {
         return repo.save(d);
     }
 
-    public Destino findById(Long id) {
+    public Destino findById(Integer id) {
         return repo.findById(id).orElse(null);
     }
 
@@ -44,7 +44,7 @@ public class DestinoService {
         return repo.save(destino);
     }
 
-    public Destino editarConImagen(Long id, String nombre, MultipartFile imagen) throws IOException {
+    public Destino editarConImagen(Integer id, String nombre, MultipartFile imagen) throws IOException {
         Destino destino = repo.findById(id).orElseThrow(() -> new RuntimeException("Destino no encontrado"));
 
         destino.setNombre(nombre);
@@ -57,7 +57,7 @@ public class DestinoService {
         return repo.save(destino);
     }
 
-    public void eliminar(Long id) {
+    public void eliminar(Integer id) {
         Destino destino = repo.findById(id).orElseThrow(() -> new RuntimeException("Destino no encontrado"));
         if (destino.getImagen() != null) {
             eliminarArchivo(destino.getImagen());

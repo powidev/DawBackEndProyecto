@@ -18,8 +18,8 @@ import lombok.Data;
 public class RevisionBus {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "revision_id")
-    private Long revisionId;
+    @Column(name = "id_revision")
+    private Integer idRevision;
 
     @Column(name = "fecha_revision", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
