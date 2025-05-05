@@ -90,7 +90,7 @@ public class DestinoService {
     private void eliminarArchivo(String ruta) {
         File archivo = new File(ruta);
         if (archivo.exists()) {
-            archivo.delete();
+            archivo.delete(); 
         }
     }
 }
