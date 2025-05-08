@@ -23,7 +23,17 @@ public class DestinoService {
     private String rutaImagenes;
 
     public List<Destino> listarTodos() {
-        return repo.findAll();
+        List<Destino> destinos = repo.findAll();
+
+        destinos.forEach(destino -> {
+            if (destino.getImagen() != null) {
+                // Elimina cualquier repetición innecesaria de la ruta base
+                String imagenLimpia = destino.getImagen().replace("uploads\\", "").replace("/api/imagenes/", "");
+                destino.setImagen("http://localhost:8090/api/imagenes/" + imagenLimpia);
+            }
+        });
+
+        return destinos;
     }
 
     public Destino registrar(Destino d) {
@@ -35,14 +45,17 @@ public class DestinoService {
     }
 
     public Destino guardarConImagen(String nombre, MultipartFile imagen) throws IOException {
-        String rutaImagen = guardarArchivo(imagen);
-
+        String nombreArchivo = guardarArchivo(imagen);
+        
         Destino destino = new Destino();
         destino.setNombre(nombre);
-        destino.setImagen(rutaImagen);
+        
+        // Asegurarse de que el frontend pueda acceder a la imagen correctamente
+        destino.setImagen("/api/imagenes/" + nombreArchivo);  
 
         return repo.save(destino);
     }
+
 
     public Destino editarConImagen(Integer id, String nombre, MultipartFile imagen) throws IOException {
         Destino destino = repo.findById(id).orElseThrow(() -> new RuntimeException("Destino no encontrado"));
@@ -50,12 +63,13 @@ public class DestinoService {
         destino.setNombre(nombre);
 
         if (imagen != null && !imagen.isEmpty()) {
-            String rutaImagen = guardarArchivo(imagen);
-            destino.setImagen(rutaImagen);
+            String nombreArchivo = guardarArchivo(imagen);
+            destino.setImagen("/api/imagenes/" + nombreArchivo); // Ruta accesible para Angular
         }
 
         return repo.save(destino);
     }
+
 
     public void eliminar(Integer id) {
         Destino destino = repo.findById(id).orElseThrow(() -> new RuntimeException("Destino no encontrado"));
