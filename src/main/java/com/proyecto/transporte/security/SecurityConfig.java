@@ -49,13 +49,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/destino/**").hasAnyRole("ADMIN", "SUPER")
 
                         // ADMIN: acceso total a bus y destino (POST, PUT, DELETE, etc.)
-                        .requestMatchers("/api/bus/**").hasRole("ADMIN")
-                        .requestMatchers("/api/destino/**").hasRole("ADMIN")
+                        .requestMatchers("/api/bus/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/api/destino/**").hasAnyRole("ADMIN")
 
                         // SUPERVISOR: acceso completo a viajes
-                        .requestMatchers("/api/viaje/**").hasRole("SUPER")
-                        .requestMatchers("/api/personal/**").hasRole("SUPER")
-                        .requestMatchers("/api/revision-buses/**").hasRole("SUPER")
+                        .requestMatchers("/api/viaje/**").hasAnyRole("SUPER")
+                        .requestMatchers("/api/personal/**").hasAnyRole("SUPER")
+                        .requestMatchers("/api/revision-buses/**").hasAnyRole("SUPER")
 
                         // USER y ADMIN: acceso a ventas
                         .requestMatchers("/api/venta/**").hasAnyRole("ADMIN", "USER")

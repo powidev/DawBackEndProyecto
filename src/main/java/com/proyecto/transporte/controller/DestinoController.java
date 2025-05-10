@@ -24,7 +24,7 @@ public class DestinoController {
         return servicioDes.listarTodos();
     }
 
-    @PostMapping("/guardar")
+    @PostMapping("/crear")
     public ResponseEntity<Destino> registrar(
         @RequestParam("nombre") String nombre,
         @RequestParam(value = "imagen", required = false) MultipartFile imagen

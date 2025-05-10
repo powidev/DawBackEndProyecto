@@ -1,6 +1,8 @@
 package com.proyecto.transporte.entidad;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,11 +33,13 @@ public class Viaje {
     @JsonIgnoreProperties("viajes")
     private Destino destino;
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "fech_sal", nullable = false)
-    private LocalDate fechaSalida;
+    private LocalDateTime fechaSalida;
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "fech_lle", nullable = false)
-    private LocalDate fechaLlegada;
+    private LocalDateTime fechaLlegada;
 
     @Column(name = "incidencias", length = 40)
     private String incidencias;

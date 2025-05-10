@@ -30,6 +30,7 @@ public class ViajeService {
     	Viaje v = repo.findById(id).orElseThrow(() -> new RuntimeException("Viaje no encontrado"));
         v.setFechaSalida(viajeActualizado.getFechaSalida());
         v.setFechaLlegada(viajeActualizado.getFechaLlegada());
+        v.setIncidencias(viajeActualizado.getIncidencias());
         v.setPrecio(viajeActualizado.getPrecio());
         v.setDestino(viajeActualizado.getDestino());
         v.setBus(viajeActualizado.getBus());

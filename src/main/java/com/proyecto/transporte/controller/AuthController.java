@@ -1,13 +1,18 @@
 package com.proyecto.transporte.controller;
 
 import com.proyecto.transporte.service.IAuthService;
+import com.proyecto.transporte.service.IUserService;
 import com.proyecto.transporte.dto.login.LoginRequest;
 import com.proyecto.transporte.dto.login.LoginResponse;
 import com.proyecto.transporte.dto.registrar.RegistrarRequestDTO;
+import com.proyecto.transporte.entidad.Usuario;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +26,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthController {
     private final IAuthService service;
+    private final IUserService userService;
+    
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest){
         LoginResponse response = service.authenticate(loginRequest);
@@ -33,5 +40,12 @@ public class AuthController {
         response.put("message", "Usuario registrado exitosamente");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+    
+    @GetMapping("/profile")
+    public ResponseEntity<Usuario> getUserProfile() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Usuario usuario = userService.getUserByUsername(username);
 
+        return ResponseEntity.ok(usuario);
+    }
 }
