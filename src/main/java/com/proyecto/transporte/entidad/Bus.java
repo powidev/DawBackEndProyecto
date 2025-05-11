@@ -1,6 +1,8 @@
 package com.proyecto.transporte.entidad;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -38,5 +40,6 @@ public class Bus {
 
     @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("bus")
+    @JsonIgnore
     private List<Viaje> viajes;
 }

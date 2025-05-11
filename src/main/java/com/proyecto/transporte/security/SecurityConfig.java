@@ -47,6 +47,8 @@ public class SecurityConfig {
                         // SUPERVISOR: puede hacer GET a bus y destino
                         .requestMatchers(HttpMethod.GET, "/api/bus/**").hasAnyRole("ADMIN", "SUPER")
                         .requestMatchers(HttpMethod.GET, "/api/destino/**").hasAnyRole("ADMIN", "SUPER")
+                        .requestMatchers(HttpMethod.GET, "/api/personal/**").hasAnyRole("ADMIN", "SUPER")
+                        .requestMatchers(HttpMethod.GET, "/api/revision/**").hasAnyRole("ADMIN", "SUPER")
 
                         // ADMIN: acceso total a bus y destino (POST, PUT, DELETE, etc.)
                         .requestMatchers("/api/bus/**").hasAnyRole("ADMIN")
@@ -55,7 +57,7 @@ public class SecurityConfig {
                         // SUPERVISOR: acceso completo a viajes
                         .requestMatchers("/api/viaje/**").hasAnyRole("SUPER")
                         .requestMatchers("/api/personal/**").hasAnyRole("SUPER")
-                        .requestMatchers("/api/revision-buses/**").hasAnyRole("SUPER")
+                        .requestMatchers("/api/revision/**").hasAnyRole("SUPER")
 
                         // USER y ADMIN: acceso a ventas
                         .requestMatchers("/api/venta/**").hasAnyRole("ADMIN", "USER")
@@ -66,8 +68,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
-
-
 
     // Configura el codificador de contraseñas
     @Bean

@@ -1,6 +1,8 @@
 package com.proyecto.transporte.entidad;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -8,7 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -30,5 +31,6 @@ public class Destino {
 
     @OneToMany(mappedBy = "destino", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("destino")
+    @JsonIgnore
     private List<Viaje> viajes;
 }
