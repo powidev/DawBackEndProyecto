@@ -68,3 +68,12 @@ VALUES
 ('imagen3.jpg', 'Cusco'),
 ('imagen4.jpg', 'Trujillo'),
 ('imagen5.jpg', 'Iquitos');
+
+Para Resetear Tablas si el increment es incorrecto:
+
+SELECT AUTO_INCREMENT
+FROM information_schema.TABLES 
+WHERE TABLE_SCHEMA = 'bdgestionbuses' 
+AND TABLE_NAME = 'personal';
+
+ALTER TABLE revision AUTO_INCREMENT = 0;
